@@ -38,7 +38,6 @@ if os.path.exists(PREFIX):
 # prepending our local sources to PYTHONPATH
 sys.path = ["%s/src" % CWD] + sys.path
 
-
 # helpers
 def app_path(app):
     for path in os.getenv('PATH').split(':'):
@@ -112,9 +111,10 @@ def task_deps():
     for pkg in packages:
         yield {
             "name": pkg,
-            "actions": ["%s -q -E %s install %s" % (quote(E_PIP), quote(PREFIX), quote(pkg))],
+            "actions": ["%s -q install %s" % (quote(E_PIP), quote(pkg))],
             "task_dep": ["env"]
         }
+
 
 def task_clear():
     """remove logs and python's bytecodes"""
